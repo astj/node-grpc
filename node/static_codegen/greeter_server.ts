@@ -43,7 +43,7 @@ function main() {
   const server = new grpc.Server();
   server.addService(GreeterService, { sayHello: sayHello });
 
-  const healthImpl = new health.Implementation({ "": health.servingStatus.SERVING });
+  const healthImpl = new health.Implementation({ "": health.servingStatus.SERVING, "helloworld.Greeter": health.servingStatus.SERVING });
   server.addService(health.service, healthImpl);
 
   server.bindAsync(
