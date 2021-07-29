@@ -38,7 +38,7 @@ const sayHello: grpc.handleUnaryCall<HelloRequest, HelloReply> = (
  * sample server port
  */
 function main() {
-  var server = new grpc.Server();
+  const server = new grpc.Server();
   server.addService(GreeterService, { sayHello: sayHello });
   server.bindAsync(
     "0.0.0.0:50051",

@@ -20,6 +20,7 @@ var PROTO_PATH = __dirname + '/../../protos/helloworld.proto';
 
 var grpc = require('@grpc/grpc-js');
 var protoLoader = require('@grpc/proto-loader');
+import wrapServerWithReflection from 'grpc-node-server-reflection';
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
     {keepCase: true,
@@ -42,7 +43,7 @@ function sayHello(call: any, callback: any) {
  * sample server port
  */
 function main() {
-  var server = new grpc.Server();
+  const server = wrapServerWithReflection(new grpc.Server());
   server.addService(hello_proto.Greeter.service, {sayHello: sayHello});
   server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
