@@ -6,6 +6,7 @@
     "@grpc/proto-loader": "^0.6.4",
     "async": "^3.2.0",
     "google-protobuf": "^3.17.3",
+    "grpc-tools": "^1.11.2",
     "lodash": "^4.17.21",
     "minimist": "^1.2.0"
   }
