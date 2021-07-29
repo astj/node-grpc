@@ -16,19 +16,22 @@
  *
  */
 
-var messages = require('./helloworld_pb');
-var services = require('./helloworld_grpc_pb');
+import { HelloRequest, HelloReply } from "./pb/helloworld_pb";
+import { GreeterService } from "./pb/helloworld_grpc_pb";
 
-var grpc = require('@grpc/grpc-js');
+import * as grpc from "@grpc/grpc-js";
 
 /**
  * Implements the SayHello RPC method.
  */
-function sayHello(call, callback) {
-  var reply = new messages.HelloReply();
-  reply.setMessage('Hello ' + call.request.getName());
+const sayHello: grpc.handleUnaryCall<HelloRequest, HelloReply> = (
+  call,
+  callback
+) => {
+  var reply = new HelloReply();
+  reply.setMessage("Hello " + call.request.getName());
   callback(null, reply);
-}
+};
 
 /**
  * Starts an RPC server that receives requests for the Greeter service at the
@@ -36,10 +39,14 @@ function sayHello(call, callback) {
  */
 function main() {
   var server = new grpc.Server();
-  server.addService(services.GreeterService, {sayHello: sayHello});
-  server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
-    server.start();
-  });
+  server.addService(GreeterService, { sayHello: sayHello });
+  server.bindAsync(
+    "0.0.0.0:50051",
+    grpc.ServerCredentials.createInsecure(),
+    () => {
+      server.start();
+    }
+  );
 }
 
 main();
