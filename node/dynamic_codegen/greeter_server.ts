@@ -33,7 +33,7 @@ var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
 /**
  * Implements the SayHello RPC method.
  */
-function sayHello(call, callback) {
+function sayHello(call: any, callback: any) {
   callback(null, {message: 'Hello ' + call.request.name});
 }
 

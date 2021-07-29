@@ -17,6 +17,7 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "ts-node": "ts-node",
+    "run-dynamic": "ts-node dynamic_codegen/greeter_server.ts",
     "run-static": "ts-node static_codegen/greeter_server.ts",
     "codegen": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./static_codegen/pb/ --grpc_out=grpc_js:./static_codegen/pb/ -I ../protos ../protos/helloworld.proto && grpc_tools_node_protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts  --ts_out=grpc_js:./static_codegen/pb/ -I ../protos ../protos/helloworld.proto",
     "codegen-route": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./static_codegen/route_guide/ --grpc_out=grpc_js:./static_codegen/route_guide/ -I ../protos ../protos/route_guide.proto"
