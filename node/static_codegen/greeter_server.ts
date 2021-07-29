@@ -24,7 +24,7 @@ var grpc = require('@grpc/grpc-js');
 /**
  * Implements the SayHello RPC method.
  */
-function sayHello(call, callback) {
+function sayHello(call: any, callback: any) {
   var reply = new messages.HelloReply();
   reply.setMessage('Hello ' + call.request.getName());
   callback(null, reply);
