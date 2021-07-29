@@ -30,6 +30,7 @@ var packageDefinition = protoLoader.loadSync(
      oneofs: true
     });
 var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+const health = require('grpc-js-health-check');
 
 /**
  * Implements the SayHello RPC method.
@@ -45,6 +46,10 @@ function sayHello(call: any, callback: any) {
 function main() {
   const server = wrapServerWithReflection(new grpc.Server());
   server.addService(hello_proto.Greeter.service, {sayHello: sayHello});
+
+  const healthImpl = new health.Implementation({ "": health.servingStatus.SERVING });
+  server.addService(health.service, healthImpl);
+
   server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });
