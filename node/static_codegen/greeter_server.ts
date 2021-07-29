@@ -21,6 +21,8 @@ import { GreeterService } from "./pb/helloworld_grpc_pb";
 
 import * as grpc from "@grpc/grpc-js";
 
+const health = require('grpc-js-health-check');
+
 /**
  * Implements the SayHello RPC method.
  */
@@ -40,6 +42,10 @@ const sayHello: grpc.handleUnaryCall<HelloRequest, HelloReply> = (
 function main() {
   const server = new grpc.Server();
   server.addService(GreeterService, { sayHello: sayHello });
+
+  const healthImpl = new health.Implementation({ "": health.servingStatus.SERVING, "helloworld.Greeter": health.servingStatus.SERVING });
+  server.addService(health.service, healthImpl);
+
   server.bindAsync(
     "0.0.0.0:50051",
     grpc.ServerCredentials.createInsecure(),
