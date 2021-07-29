@@ -1,3 +1,9 @@
+## run
+
+```
+npm run run-static
+```
+
 ## codegen
 
 ```
