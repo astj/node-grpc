@@ -20,7 +20,6 @@ import { HelloRequest, HelloReply } from "./pb/helloworld_pb";
 import { GreeterService } from "./pb/helloworld_grpc_pb";
 
 import * as grpc from "@grpc/grpc-js";
-import wrapServerWithReflection from 'grpc-node-server-reflection';
 
 /**
  * Implements the SayHello RPC method.
@@ -39,7 +38,7 @@ const sayHello: grpc.handleUnaryCall<HelloRequest, HelloReply> = (
  * sample server port
  */
 function main() {
-  const server = wrapServerWithReflection(new grpc.Server());
+  const server = new grpc.Server();
   server.addService(GreeterService, { sayHello: sayHello });
   server.bindAsync(
     "0.0.0.0:50051",
