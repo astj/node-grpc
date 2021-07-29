@@ -17,7 +17,8 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "ts-node": "ts-node",
-    "codegen": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./static_codegen/ --grpc_out=grpc_js:./static_codegen/ -I ../protos ../protos/helloworld.proto && grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./static_codegen/route_guide/ --grpc_out=grpc_js:./static_codegen/route_guide/ -I ../protos ../protos/route_guide.proto && grpc_tools_node_protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts  --ts_out=grpc_js:./static_codegen/ -I ../protos ../protos/helloworld.proto"
+    "codegen": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./static_codegen/pb/ --grpc_out=grpc_js:./static_codegen/pb/ -I ../protos ../protos/helloworld.proto && grpc_tools_node_protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts  --ts_out=grpc_js:./static_codegen/pb/ -I ../protos ../protos/helloworld.proto",
+    "codegen-route": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./static_codegen/route_guide/ --grpc_out=grpc_js:./static_codegen/route_guide/ -I ../protos ../protos/route_guide.proto"
   },
   "devDependencies": {
     "grpc_tools_node_protoc_ts": "^5.3.0"

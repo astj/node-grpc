@@ -16,8 +16,8 @@
  *
  */
 
-var messages = require('./helloworld_pb');
-var services = require('./helloworld_grpc_pb');
+var messages = require('./pb/helloworld_pb');
+var services = require('./pb/helloworld_grpc_pb');
 
 var grpc = require('@grpc/grpc-js');
 
